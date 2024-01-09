@@ -7,27 +7,103 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="-364dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+        <!-- Logo Image -->
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <!-- "Categories" Text -->
+        <TextView
+            android:id="@+id/categoriesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/logoImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Categories"
+            android:textSize="35dp" />
 
-    <include layout="@layout/content_main" />
+        <!-- GridLayout with Text Boxes -->
+        <GridLayout
+            android:id="@+id/gridLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/categoriesText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:columnCount="2"
+            android:rowCount="2">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+            <!-- Text Box 2 -->
+            <TextView
+                android:id="@+id/cat1"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_margin="8dp"
+                android:background="@drawable/roundcorner"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Mini Market"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cat2"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/roundcorner"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Healthcare Store"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <!-- Text Box 3 -->
+            <TextView
+                android:id="@+id/cat3"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_margin="8dp"
+                android:background="@drawable/roundcorner"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Stationary Stop"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+            <!-- Text Box 4 -->
+            <TextView
+                android:id="@+id/cat4"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/roundcorner"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Tech Store"
+                android:textColor="#000000"
+                android:textStyle="bold" />
+
+        </GridLayout>
+
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

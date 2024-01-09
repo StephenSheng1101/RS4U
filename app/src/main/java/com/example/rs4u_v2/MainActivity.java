@@ -1,5 +1,6 @@
 package com.example.rs4u_v2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -18,61 +19,55 @@ import com.example.rs4u_v2.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMainBinding binding;
-
+    private TextView cat1;
+    private TextView cat2;
+    private TextView cat3;
+    private TextView cat4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+        cat1 = findViewById(R.id.cat1);
+        cat1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAnchorView(R.id.fab)
-                        .setAction("Action", null).show();
+                // hhhButton to a new activity for user to enter location information
+                Intent intent = new Intent(MainActivity.this, MiniMarket.class);
+                startActivity(intent);
             }
         });
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // aInflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        cat2 = findViewById(R.id.cat2);
+        cat2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Button to a new activity for user to enter location information
+                Intent intent = new Intent(MainActivity.this, Healthcare.class);
+                startActivity(intent);
+            }
+        });
+        cat3 = findViewById(R.id.cat3);
+        cat3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Button to a new activity for user to enter location information
+                Intent intent = new Intent(MainActivity.this, Stationary.class);
+                startActivity(intent);
+            }
+        });
+        cat4 = findViewById(R.id.cat4);
+        cat4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Button to a new activity for user to enter location information
+                Intent intent = new Intent(MainActivity.this, Tech.class);
+                startActivity(intent);
+            }
+        });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
     }
 }
