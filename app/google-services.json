@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "29272334479",
+    "project_id": "rs4u-567d8",
+    "storage_bucket": "rs4u-567d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29272334479:android:10a0b0c26fb7a5fc3ad0fa",
+        "android_client_info": {
+          "package_name": "com.example.rs4u_v2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPiwG00FGu5Dr-2v1aDS6rTLc03cTpzAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
