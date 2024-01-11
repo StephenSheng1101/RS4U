@@ -45,29 +45,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!-- Box 1 in the second row -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="abc" /> <!-- Set your desired background color -->
-
-                <!-- Box 2 in the second row -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="8dp"
-                    android:textColor="#000000"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="sdf" /> <!-- Set your desired background color -->
-
-                <!-- Add more boxes as needed -->
 
             </LinearLayout>
 

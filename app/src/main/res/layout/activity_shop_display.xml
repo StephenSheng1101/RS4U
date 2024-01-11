@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShopDisplay">
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Shop Info -->
+        <LinearLayout
+            android:id="@+id/Layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shopCategoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"/>
+
+            <TextView
+                android:id="@+id/shopNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shopLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shopEmailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shopPhoneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shopDescTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <!-- Get Review and Rating Shop Info -->
+        <LinearLayout
+            android:layout_below="@id/Layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ReviewTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave your review or comment!"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+
+            <!-- Review input -->
+            <EditText
+                android:id="@+id/reviewEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Write your review..." />
+
+            <!-- Rating -->
+
+            <TextView
+                android:id="@+id/RateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate Us!"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1.0"/>
+
+            <!-- Submit button -->
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit Review"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
