@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         cat1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // hhhButton to a new activity for user to enter location information
+                // Button to a new activity for user to enter location information
                 Intent intent = new Intent(MainActivity.this, MiniMarket.class);
                 startActivity(intent);
             }
