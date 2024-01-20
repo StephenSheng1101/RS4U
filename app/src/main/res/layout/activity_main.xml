@@ -13,7 +13,7 @@
         tools:layout_editor_absoluteX="193dp"
         tools:layout_editor_absoluteY="-364dp">
 
-        <!-- Logo Image -->
+        <!-- App Logo Image -->
         <ImageView
             android:id="@+id/logoImage"
             android:layout_width="wrap_content"
