@@ -40,34 +40,34 @@
             android:layout_below="@id/categoriesText"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:columnCount="4"
-            android:rowCount="1">
+            android:columnCount="2"
+            android:rowCount="2">
 
             <!-- Text Box 2 -->
             <TextView
                 android:id="@+id/cat1"
-                android:layout_width="80dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="0"
-                android:layout_margin="8dp"
+                android:layout_margin="4dp"
                 android:background="@drawable/roundcorner"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="2dp"
                 android:text="Mini Market"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/cat2"
-                android:layout_width="80dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:layout_row="0"
                 android:layout_column="1"
-                android:layout_margin="8dp"
+                android:layout_margin="4dp"
                 android:background="@drawable/roundcorner"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="2dp"
                 android:text="Healthcare Store"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -75,14 +75,14 @@
             <!-- Text Box 3 -->
             <TextView
                 android:id="@+id/cat3"
-                android:layout_width="80dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:layout_margin="8dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_margin="4dp"
                 android:background="@drawable/roundcorner"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="2dp"
                 android:text="Stationary Stop"
                 android:textColor="#000000"
                 android:textStyle="bold" />
@@ -90,19 +90,50 @@
             <!-- Text Box 4 -->
             <TextView
                 android:id="@+id/cat4"
-                android:layout_width="80dp"
+                android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:layout_row="0"
-                android:layout_column="3"
-                android:layout_margin="8dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:layout_margin="4dp"
                 android:background="@drawable/roundcorner"
                 android:gravity="center"
-                android:padding="8dp"
+                android:padding="2dp"
                 android:text="Tech Store"
                 android:textColor="#000000"
                 android:textStyle="bold" />
 
         </GridLayout>
+
+        <!-- Shop Info -->
+        <LinearLayout
+            android:id="@+id/Layoutofrecommendshop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shopCategoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="35dp"/>
+
+            <TextView
+                android:id="@+id/shopNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/shoplatestrating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
 
 
     </RelativeLayout>

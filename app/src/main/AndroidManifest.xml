@@ -20,19 +20,13 @@
             android:exported="false" />
         <activity
             android:name=".Tech"
-            android:exported="false"
-            android:label="@string/title_activity_tech"
-            android:theme="@style/Theme.RS4U_V2" />
+            android:exported="false" />
         <activity
             android:name=".Healthcare"
-            android:exported="false"
-            android:label="@string/title_activity_healthcare"
-            android:theme="@style/Theme.RS4U_V2" />
+            android:exported="false"/>
         <activity
             android:name=".Stationary"
-            android:exported="false"
-            android:label="@string/title_activity_stationary"
-            android:theme="@style/Theme.RS4U_V2" />
+            android:exported="false"/>
         <activity
             android:name=".MiniMarket"
             android:exported="false" />
