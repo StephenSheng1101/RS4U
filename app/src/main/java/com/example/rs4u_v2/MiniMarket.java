@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,8 +21,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class MiniMarket extends AppCompatActivity {
 
     FrameLayout filter;
-    private LinearLayout container;
+    private GridLayout gridLayout;
     private FirebaseFirestore db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +38,11 @@ public class MiniMarket extends AppCompatActivity {
             }
         });
 
-        container = findViewById(R.id.minimarketView);
+        gridLayout = findViewById(R.id.minimarketGridLayout); // Assuming you have a GridLayout in your XML with id "minimarketGridLayout"
         db = FirebaseFirestore.getInstance();
         retrieveDataFromFirestore();
     }
+
     private void retrieveDataFromFirestore() {
         db.collection("ShopInformation")
                 .get()
@@ -51,58 +54,78 @@ public class MiniMarket extends AppCompatActivity {
                                 // Extract data from the document
                                 String shopID = document.getString("shop_id");
                                 String shopName = document.getString("shop_name");
-                                String shopCategory = document.getString("shop_cat");
-                                String shopLocation = document.getString("shop_location");
-                                String shopEmail = document.getString("shop_email");
-                                String shopPhone = document.getString("shop_phone");
-                                String shopDesc = document.getString("shop_desc");
 
-                                // Create a LinearLayout to hold the data
-                                LinearLayout shopLayout = new LinearLayout(MiniMarket.this);
-                                shopLayout.setOrientation(LinearLayout.VERTICAL);
+                                // Query CusReview collection for all reviews of the shop
+                                db.collection("CusReview")
+                                        .whereEqualTo("shop_id", shopID)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                                if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                                    float totalRating = 0;
+                                                    int reviewCount = 0;
 
-                                // Create TextViews for each data field
-                                TextView nameTextView = new TextView(MiniMarket.this);
-                                nameTextView.setText("Shop Name: " + shopName);
+                                                    // Loop through each review
+                                                    for (QueryDocumentSnapshot reviewDocument : task.getResult()) {
+                                                        String ratingString = reviewDocument.getString("rating");
+                                                        if (ratingString != null && !ratingString.trim().isEmpty()) {
+                                                            try {
+                                                                float rating = Float.parseFloat(ratingString);
+                                                                totalRating += rating;
+                                                                reviewCount++;
 
-                                TextView categoryTextView = new TextView(MiniMarket.this);
-                                categoryTextView.setText("Category: " + shopCategory);
+                                                            } catch (NumberFormatException e) {
+                                                                Log.e("Mini Market", "Error parsing rating to float: " + ratingString, e);
+                                                            }
+                                                        } else {
+                                                            Log.e("Mini Market", "Rating string is null or empty");
+                                                        }
+                                                    }
 
-                                TextView locationTextView = new TextView(MiniMarket.this);
-                                locationTextView.setText("Location: " + shopLocation);
+                                                    // Calculate average rating
+                                                    float averageRating = totalRating / reviewCount;
 
-                                TextView emailTextView = new TextView(MiniMarket.this);
-                                emailTextView.setText("Email: " + shopEmail);
+                                                    // Create a GridLayout to hold the data
+                                                    GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                                                    params.width = GridLayout.LayoutParams.MATCH_PARENT;
+                                                    params.height = GridLayout.LayoutParams.WRAP_CONTENT;
+                                                    params.rowSpec = GridLayout.spec(gridLayout.getChildCount(), GridLayout.FILL, 1f);
+                                                    params.columnSpec = GridLayout.spec(0, 2, 1f);
 
-                                TextView phoneTextView = new TextView(MiniMarket.this);
-                                phoneTextView.setText("Phone: " + shopPhone);
+                                                    LinearLayout shopLayout = new LinearLayout(MiniMarket.this);
+                                                    shopLayout.setOrientation(LinearLayout.VERTICAL);
+                                                    shopLayout.setLayoutParams(params);
 
-                                TextView descTextView = new TextView(MiniMarket.this);
-                                descTextView.setText("Description: " + shopDesc);
+                                                    // Create TextViews for shop name, average rating, and review count
+                                                    TextView nameTextView = new TextView(MiniMarket.this);
+                                                    nameTextView.setText("Shop Name: " + shopName);
 
-                                // Set an OnClickListener for the LinearLayout
-                                shopLayout.setOnClickListener(v -> {
-                                    Intent intent = new Intent(MiniMarket.this, ShopDisplay.class);
-                                    intent.putExtra("shopID", shopID);
-                                    intent.putExtra("shopName", shopName);
-                                    intent.putExtra("shopCategory", shopCategory);
-                                    intent.putExtra("shopLocation", shopLocation);
-                                    intent.putExtra("shopEmail", shopEmail);
-                                    intent.putExtra("shopPhone", shopPhone);
-                                    intent.putExtra("shopDesc", shopDesc);
-                                    startActivity(intent);
-                                });
+                                                    TextView ratingTextView = new TextView(MiniMarket.this);
+                                                    ratingTextView.setText("Average Rating: " + averageRating);
 
-                                // Add TextViews to the LinearLayout
-                                shopLayout.addView(nameTextView);
-                                shopLayout.addView(categoryTextView);
-                                shopLayout.addView(locationTextView);
-                                shopLayout.addView(emailTextView);
-                                shopLayout.addView(phoneTextView);
-                                shopLayout.addView(descTextView);
+                                                    TextView reviewCountTextView = new TextView(MiniMarket.this);
+                                                    reviewCountTextView.setText("Review Count: " + reviewCount);
 
-                                // Add the LinearLayout to the container
-                                container.addView(shopLayout);
+                                                    // Set an OnClickListener for the LinearLayout
+                                                    shopLayout.setOnClickListener(v -> {
+                                                        Intent intent = new Intent(MiniMarket.this, ShopDisplay.class);
+                                                        intent.putExtra("shopID", shopID);
+                                                        startActivity(intent);
+                                                    });
+
+                                                    // Add TextViews to the LinearLayout
+                                                    shopLayout.addView(nameTextView);
+                                                    shopLayout.addView(ratingTextView);
+                                                    shopLayout.addView(reviewCountTextView);
+
+                                                    // Add the LinearLayout to the GridLayout with the specified LayoutParams
+                                                    gridLayout.addView(shopLayout, params);
+                                                } else {
+                                                    Log.e("Mini Market", "Error getting review documents: ", task.getException());
+                                                }
+                                            }
+                                        });
                             }
                         } else {
                             Log.e("Mini Market", "Error getting documents: ", task.getException());
@@ -110,4 +133,5 @@ public class MiniMarket extends AppCompatActivity {
                     }
                 });
     }
+
 }

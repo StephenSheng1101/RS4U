@@ -42,12 +42,6 @@ public class ShopDisplay extends AppCompatActivity {
         // Get the passed information from the intent
         Intent intent = getIntent();
         String shopID = intent.getStringExtra("shopID");
-        String shopName = intent.getStringExtra("shopName");
-        String shopCategory = intent.getStringExtra("shopCategory");
-        String shopLocation = intent.getStringExtra("shopLocation");
-        String shopEmail = intent.getStringExtra("shopEmail");
-        String shopPhone = intent.getStringExtra("shopPhone");
-        String shopDesc = intent.getStringExtra("shopDesc");
 
         // Find the TextViews in the layout
         TextView shopNameTextView = findViewById(R.id.shopNameTextView);
@@ -63,17 +57,35 @@ public class ShopDisplay extends AppCompatActivity {
         reviewEditText = findViewById(R.id.reviewEditText);
         Button submitButton = findViewById(R.id.submitButton);
 
-        // Set the retrieved information to the TextViews
-        shopNameTextView.setText("Shop Name: " + shopName + " " + shopID);
-        shopLocationTextView.setText("Location: " + shopLocation);
-        shopEmailTextView.setText("Email: " + shopEmail);
-        shopPhoneTextView.setText("Phone Number: " + shopPhone);
-        shopDescTextView.setText("Description: " + shopDesc);
-        shopCategoryTextView.setText(shopCategory);
+        // Retrieve additional shop details from Firestore
+        firestore.collection("ShopInformation")
+                .document(shopID)
+                .get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String shopName = documentSnapshot.getString("shop_name");
+                        String shopCategory = documentSnapshot.getString("shop_cat");
+                        String shopLocation = documentSnapshot.getString("shop_location");
+                        String shopEmail = documentSnapshot.getString("shop_email");
+                        String shopPhone = documentSnapshot.getString("shop_phone");
+                        String shopDesc = documentSnapshot.getString("shop_desc");
+
+                        // Set the retrieved information to the TextViews
+                        shopNameTextView.setText("Shop Name: " + shopName);
+                        shopLocationTextView.setText("Location: " + shopLocation);
+                        shopEmailTextView.setText("Email: " + shopEmail);
+                        shopPhoneTextView.setText("Phone Number: " + shopPhone);
+                        shopDescTextView.setText("Description: " + shopDesc);
+                        shopCategoryTextView.setText(shopCategory);
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("Shop Display", "Error getting shop details from Firestore", e);
+                    // Handle error if necessary
+                });
 
         // Handle submit button click
         submitButton.setOnClickListener(v -> submitReview());
-
     }
 
     private void submitReview() {

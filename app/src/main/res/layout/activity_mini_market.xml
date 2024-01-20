@@ -33,20 +33,21 @@
 
         <!-- Scroll View Content -->
         <LinearLayout
-            android:id="@+id/minimarketView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
             <!-- Place your content here -->
-            <LinearLayout
+            <GridLayout
+                android:id="@+id/minimarketGridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:columnCount="2"
+                android:rowCount="2"
+                android:layout_marginTop="16dp">
 
-
-            </LinearLayout>
+            </GridLayout>
 
         </LinearLayout>
     </ScrollView>
