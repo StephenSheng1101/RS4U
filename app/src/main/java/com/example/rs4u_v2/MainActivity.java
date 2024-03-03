@@ -24,7 +24,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    //Text: Update 02:43pm 02/03/2024 versionn
+    //Text: Update 18:46pm 03/03/2024 Version
     private TextView cat1;
     private TextView cat2;
     private TextView cat3;

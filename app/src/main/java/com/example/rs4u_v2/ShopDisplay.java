@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -59,23 +60,24 @@ public class ShopDisplay extends AppCompatActivity {
 
         // Retrieve additional shop details from Firestore
         firestore.collection("ShopInformation")
-                .document(shopID)
+                .whereEqualTo("shop_id", shopID)
                 .get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (documentSnapshot.exists()) {
-                        String shopName = documentSnapshot.getString("shop_name");
-                        String shopCategory = documentSnapshot.getString("shop_cat");
-                        String shopLocation = documentSnapshot.getString("shop_location");
-                        String shopEmail = documentSnapshot.getString("shop_email");
-                        String shopPhone = documentSnapshot.getString("shop_phone");
-                        String shopDesc = documentSnapshot.getString("shop_desc");
+                .addOnSuccessListener(querySnapshot -> {
+                    for (QueryDocumentSnapshot document : querySnapshot) {
+                        // Retrieve data from the document
+                        String shopName = document.getString("shop_name");
+                        String shopCategory = document.getString("shop_cat");
+                        String shopLocation = document.getString("shop_location");
+                        String shopEmail = document.getString("shop_email");
+                        String shopPhone = document.getString("shop_phone");
+                        String shopDesc = document.getString("shop_desc");
 
                         // Set the retrieved information to the TextViews
-                        shopNameTextView.setText("Shop Name: " + shopName);
-                        shopLocationTextView.setText("Location: " + shopLocation);
-                        shopEmailTextView.setText("Email: " + shopEmail);
-                        shopPhoneTextView.setText("Phone Number: " + shopPhone);
-                        shopDescTextView.setText("Description: " + shopDesc);
+                        shopNameTextView.setText(String.format("Shop Name: %s", shopName));
+                        shopLocationTextView.setText(String.format("Location: %s", shopLocation));
+                        shopEmailTextView.setText(String.format("Email: %s", shopEmail));
+                        shopPhoneTextView.setText(String.format("Phone Number: %s", shopPhone));
+                        shopDescTextView.setText(String.format("Description: %s", shopDesc));
                         shopCategoryTextView.setText(shopCategory);
                     }
                 })
@@ -83,6 +85,7 @@ public class ShopDisplay extends AppCompatActivity {
                     Log.e("Shop Display", "Error getting shop details from Firestore", e);
                     // Handle error if necessary
                 });
+
 
         // Handle submit button click
         submitButton.setOnClickListener(v -> submitReview());
